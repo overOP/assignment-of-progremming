@@ -2,39 +2,28 @@ import { postStudentData, getAllStudents, deleteStudent, updateStudent } from ".
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("student-form");
-  const studentList = document.getElementById("student-list");
   const addSubjectBtn = document.getElementById("add-subject");
   const subjectsFormGroup = document.getElementById("subjects-form-group");
 
   let editMode = false;
   let currentEditId = null;
 
-  loadStudents();
+  // Check if editStudentId exists in localStorage
+  const editStudentId = localStorage.getItem("editStudentId");
+  if (editStudentId) {
+    const res = getAllStudents();
+    if (res.status) {
+      const student = res.payload.find(s => s.id == editStudentId);
+      if (student) {
+        fillForm(student);
+        editMode = true;
+        currentEditId = student.id;
+      }
+    }
+    localStorage.removeItem("editStudentId"); // Clear after loading
+  }
 
-  addSubjectBtn.addEventListener("click", function () {
-    const subjectRow = document.createElement("div");
-    subjectRow.classList.add("subject-row");
-
-    const subjectInput = document.createElement("input");
-    subjectInput.type = "text";
-    subjectInput.placeholder = "Enter Subject";
-
-    const maskInput = document.createElement("input");
-    maskInput.type = "text";
-    maskInput.placeholder = "Enter Mask";
-
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.textContent = "Remove";
-    removeBtn.addEventListener("click", function () {
-      subjectsFormGroup.removeChild(subjectRow);
-    });
-
-    subjectRow.appendChild(subjectInput);
-    subjectRow.appendChild(maskInput);
-    subjectRow.appendChild(removeBtn);
-    subjectsFormGroup.appendChild(subjectRow);
-  });
+  addSubjectBtn.addEventListener("click", addSubjectRow);
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -60,46 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       student.id = currentEditId;
       updateStudent(student);
-      editMode = false;
-      currentEditId = null;
     }
 
     form.reset();
     subjectsFormGroup.innerHTML = "";
-    loadStudents();
+    editMode = false;
+    currentEditId = null;
+    alert("Saved Successfully");
   });
 
-  function loadStudents() {
-    studentList.innerHTML = "";
-    const res = getAllStudents();
-    if (res.status) {
-      res.payload.forEach(student => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${student.name}</td>
-          <td>${student.email_address}</td>
-          <td>${student.phone_number}</td>
-          <td>${student.address}</td>
-          <td>${student.father_name}</td>
-          <td>${student.mother_name}</td>
-          <td>${student.age || ""}</td>
-          <td>${student.guardian_number}</td>
-          <td><button class="edit-btn">Edit</button></td>
-          <td><button class="delete-btn">Delete</button></td>
-        `;
-
-        row.querySelector(".edit-btn").addEventListener("click", () => editStudent(student));
-        row.querySelector(".delete-btn").addEventListener("click", () => {
-          deleteStudent(student.id);
-          loadStudents();
-        });
-
-        studentList.appendChild(row);
-      });
-    }
-  }
-
-  function editStudent(student) {
+  function fillForm(student) {
     Object.entries(student).forEach(([key, value]) => {
       if (form.elements[key] && key !== "subjects") {
         form.elements[key].value = value;
@@ -108,31 +67,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     subjectsFormGroup.innerHTML = "";
     (student.subjects || []).forEach(sub => {
-      const subjectRow = document.createElement("div");
-      subjectRow.classList.add("subject-row");
+      addSubjectRow(sub.subject, sub.mask);
+    });
+  }
 
-      const subjectInput = document.createElement("input");
-      subjectInput.type = "text";
-      subjectInput.value = sub.subject;
+  function addSubjectRow(subject = "", mask = "") {
+    const subjectRow = document.createElement("div");
+    subjectRow.classList.add("subject-row");
 
-      const maskInput = document.createElement("input");
-      maskInput.type = "text";
-      maskInput.value = sub.mask;
+    const subjectInput = document.createElement("input");
+    subjectInput.type = "text";
+    subjectInput.placeholder = "Enter Subject";
+    subjectInput.value = subject;
 
-      const removeBtn = document.createElement("button");
-      removeBtn.type = "button";
-      removeBtn.textContent = "Remove";
-      removeBtn.addEventListener("click", function () {
-        subjectsFormGroup.removeChild(subjectRow);
-      });
+    const maskInput = document.createElement("input");
+    maskInput.type = "text";
+    maskInput.placeholder = "Enter Marks";
+    maskInput.value = mask;
 
-      subjectRow.appendChild(subjectInput);
-      subjectRow.appendChild(maskInput);
-      subjectRow.appendChild(removeBtn);
-      subjectsFormGroup.appendChild(subjectRow);
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", function () {
+      subjectsFormGroup.removeChild(subjectRow);
     });
 
-    editMode = true;
-    currentEditId = student.id;
+    subjectRow.appendChild(subjectInput);
+    subjectRow.appendChild(maskInput);
+    subjectRow.appendChild(removeBtn);
+    subjectsFormGroup.appendChild(subjectRow);
   }
 });
