@@ -10,27 +10,25 @@ function generateRandomId8Bit() {
 export function postStudentData(data) {
   if (data) {
     const { payload: allstudents } = getDataFromDB(table_name);
-
-    // Check email uniqueness
     const exists = allstudents.find(s => s.email_address === data.email_address);
     if (exists) {
       return generateResponse(false, MESSAGES.student.ALREADY_EXISTS);
     }
-
     const studentId = generateRandomId8Bit();
-
     const newStudent = { id: studentId, ...data };
     allstudents.push(newStudent);
     setDataToDB(table_name, allstudents);
-
     return generateResponse(true, MESSAGES.student.SAVED, newStudent);
   }
   return generateResponse(false, MESSAGES.INVALID);
 }
 
 export function getAllStudents() {
-  const { payload } = getDataFromDB(table_name);
-  return payload;
+  const result = getDataFromDB(table_name);
+  if (result?.payload?.length > 0) {
+    return generateResponse(true, 200, result.payload);
+  }
+  return generateResponse(false, 400);
 }
 
 export function deleteStudent(id) {

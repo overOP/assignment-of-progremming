@@ -1,210 +1,195 @@
-/* Base styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-    background-color: #e6f0fa; /* light blue */
-    color: #2c3e50;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  /* Main container */
-  .main {
-    width: 100%;
-    max-width: 1100px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 30px 40px;
-    box-sizing: border-box;
-  }
-  
-  /* Form styles */
-  .form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-  
-  /* Each form group */
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #34495e;
-    font-size: 14px;
-  }
-  
-  input {
-    padding: 12px 14px;
-    border-radius: 8px;
-    border: 1.8px solid #b0c4de;
-    font-size: 15px;
-    font-weight: 500;
-    color: #34495e;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  input::placeholder {
-    color: #a0aec0;
-  }
-  
-  input:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 8px #aed6f1;
-  }
-  
-  /* Submit/Update button */
-  button {
-    width: 425%;
-    grid-column: 1 / -1;
-    padding: 14px 0;
-    background-color: #5dade2;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    color: #fff;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #3498db;
-  }
-  
-  /* Table styles */
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 15px; /* space between rows */
-    font-size: 14px;
-    font-weight: 600;
-    color: #2c3e50;
-  }
-  
-  thead tr {
-    background-color: transparent;
-  }
-  
-  th {
-    text-align: left;
-    padding: 14px 15px;
-    font-weight: 700;
-    color: #34495e;
-    border-bottom: 2px solid #d6e6fb;
-  }
-  
-  tbody tr {
-    background-color: #f9fbff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: default;
-  }
-  
-  tbody tr:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 18px rgba(52, 152, 219, 0.25);
-  }
-  
-  td {
-    padding: 14px 15px;
-    vertical-align: middle;
-    word-break: break-word;
-  }
-  
-  /* Action buttons in table */
-  button.edit-btn,
-  button.delete-btn {
-    width: 80px;
-    padding: 7px 16px;
-    font-size: 13px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.edit-btn {
-    background-color: #6bb9f0;
-    margin-right: 8px;
-  }
-  
-  button.edit-btn:hover {
-    background-color: #3498db;
-  }
-  
-  button.delete-btn {
-    background-color: #f27878;
-  }
-  
-  button.delete-btn:hover {
-    background-color: #e74c3c;
-  }
-  
-  /* Responsive design */
-  
-  /* Tablet: two columns for form */
-  @media (max-width: 900px) {
-    .form {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  /* Mobile: single column */
-  @media (max-width: 600px) {
-    body {
-      padding: 15px 10px;
-    }
-    
-    .main {
-      padding: 20px 20px;
-    }
-    
-    .form {
-      grid-template-columns: 1fr;
-    }
-    
-    button {
-      width: 100%;
-    }
-  
-    /* Make table horizontally scrollable */
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  
-    thead, tbody, tr, th, td {
-      display: inline-block;
-    }
-  
-    thead tr {
-      background-color: transparent;
-    }
-  
-    th, td {
-      padding: 10px 12px;
-      min-width: 120px;
-    }
-  
-    td {
-      word-break: normal;
-    }
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f5f7fa;
+  color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 30px 40px;
+  box-sizing: border-box;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #34495e;
+  font-size: 14px;
+}
+
+input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.8px solid #b0c4de;
+  font-size: 15px;
+  font-weight: 500;
+  color: #34495e;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: #a0aec0;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 8px #aed6f1;
+}
+
+button {
+  width: 100%;
+  grid-column: 1 / -1;
+  padding: 14px 0;
+  background-color: #5dade2;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3498db;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+thead tr {
+  background-color: transparent;
+}
+
+th {
+  text-align: left;
+  padding: 14px 15px;
+  font-weight: 700;
+  color: #34495e;
+  border-bottom: 2px solid #d6e6fb;
+}
+
+tbody tr {
+  background-color: #f9fbff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+tbody tr:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(52, 152, 219, 0.25);
+}
+
+td {
+  padding: 14px 15px;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+/* Edit/Delete buttons */
+button.edit-btn,
+button.delete-btn {
+  width: 80px;
+  padding: 7px 16px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button.edit-btn {
+  background-color: #6bb9f0;
+  margin-right: 8px;
+}
+
+button.edit-btn:hover {
+  background-color: #3498db;
+}
+
+button.delete-btn {
+  background-color: #f27878;
+}
+
+button.delete-btn:hover {
+  background-color: #e74c3c;
+}
+
+/* Subject rows */
+.subject-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.subject-row input {
+  flex: 1;
+}
+
+.subject-row button {
+  width: auto;
+  background: #e74c3c;
+  border-radius: 8px;
+  border: none;
+  padding: 7px 14px;
+  font-weight: 600;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.subject-row button:hover {
+  background: #c0392b;
+}
+
+/* Add Subject button */
+button#add-subject {
+  width: 120px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #2ecc71;
+  color: white;
+  font-weight: 700;
+  border: none;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+button#add-subject:hover {
+  background-color: #27ae60;
+}
