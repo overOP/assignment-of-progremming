@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     subjectInput.value = subject;
 
     const maskInput = document.createElement("input");
-    maskInput.type = "text";
+    maskInput.type = "number";
     maskInput.placeholder = "Enter Marks";
     maskInput.value = mask;
 
