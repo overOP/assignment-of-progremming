@@ -1,10 +1,10 @@
+<!-- edit.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Edit Students</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
@@ -22,21 +22,21 @@
     <div class="main">
       <table id="student-table" data-aos="zoom-up">
         <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Father Name</th>
-              <th>Mother Name</th>
-              <th>Age</th>
-              <th>Guardian Number</th>
-              <th>Subjects</th> <!-- NEW -->
-              <th>Marks</th>    <!-- NEW -->
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Father Name</th>
+            <th>Mother Name</th>
+            <th>Age</th>
+            <th>Guardian</th>
+            <th>Subjects</th>
+            <th>Marks</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
         <tbody id="student-list"></tbody>
       </table>
     </div>
@@ -45,7 +45,7 @@
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script type="module" src="./edit.js"></script>
   <script>
-    AOS.init({ duration: 600, easing: "ease-in-out", once: true });
+    AOS.init({ duration: 600 });
   </script>
 </body>
 </html>

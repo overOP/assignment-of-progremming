@@ -1,6 +1,7 @@
+// edit.js
 import { getAllStudents, deleteStudent } from "./models/students.js";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const studentList = document.getElementById("student-list");
 
   loadStudents();
@@ -10,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const res = getAllStudents();
     if (res.status) {
       res.payload.forEach(student => {
-        const subjects = student.subjects?.map(sub => sub.subject).join(", ") || "No subjects";
-        const marks = student.subjects?.map(sub => sub.mask).join(", ") || "No marks";
+        const subjects = student.subjects?.map(sub => sub.subject).join(", ") || "None";
+        const marks = student.subjects?.map(sub => sub.mask).join(", ") || "None";
 
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         row.querySelector(".edit-btn").addEventListener("click", () => {
           localStorage.setItem("editStudentId", student.id);
-          window.location.href = "./index.html"; // Go to home page for editing
+          window.location.href = "./index.html";
         });
 
         studentList.appendChild(row);

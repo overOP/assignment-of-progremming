@@ -1,3 +1,4 @@
+// utils/constants.js
 export const TABLE_NAME = {
   STUDENTS: "students",
 };

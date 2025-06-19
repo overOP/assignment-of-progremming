@@ -1,4 +1,5 @@
-import { postStudentData, getAllStudents, deleteStudent, updateStudent } from "./models/students.js";
+// index.js
+import { postStudentData, getAllStudents, updateStudent } from "./models/students.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("student-form");
@@ -8,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let editMode = false;
   let currentEditId = null;
 
-  // Check if editStudentId exists in localStorage
   const editStudentId = localStorage.getItem("editStudentId");
   if (editStudentId) {
     const res = getAllStudents();
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         currentEditId = student.id;
       }
     }
-    localStorage.removeItem("editStudentId"); // Clear after loading
+    localStorage.removeItem("editStudentId");
   }
 
   addSubjectBtn.addEventListener("click", addSubjectRow);
@@ -88,13 +88,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
     removeBtn.textContent = "Remove";
-    removeBtn.addEventListener("click", function () {
+    removeBtn.addEventListener("click", () => {
       subjectsFormGroup.removeChild(subjectRow);
     });
 
-    subjectRow.appendChild(subjectInput);
-    subjectRow.appendChild(maskInput);
-    subjectRow.appendChild(removeBtn);
+    subjectRow.append(subjectInput, maskInput, removeBtn);
     subjectsFormGroup.appendChild(subjectRow);
   }
 });

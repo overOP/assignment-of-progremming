@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./Styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Report</title>
-  </head>
-  <body>
-    <div class="sidebar">
-        <h2>Menu</h2>
-        <a href="./index.html">Home</a>
-        <a href="./edit.html">Edit</a>
-        <a href="./report.html">Report</a>
-        <a href="#">Settings</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Report Students</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="./index.html">Home</a>
+    <a href="./edit.html">Edit</a>
+    <a href="./report.html" class="active">Report</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <div class="main-content">
+    <form id="report-form" class="form">
+      <div class="form-row">
+        <label for="fullname">Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter student name" />
       </div>
-    <form class="form">
-      <div class="form-group">
-        <div class="form-row">
-          <label for="fullname">Name</label>
-          <input
-            name="fullname"
-            type="text"
-            id="fullname"
-            placeholder="Enter name"
-            required
-          />
-        </div>
-        <div class="form-row">
-          <label for="class">Class</label>
-          <select id="class" name="class">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label for="subject">Subject</label>
-          <!-- <input name="subject" type="text" id="subject" /> -->
-          <select id="subject" name="subject">
-            <option value="all">All</option>
-          </select>
-        </div>
+      <div class="form-row">
+        <label for="class">Class</label>
+        <select id="class" name="class">
+          <option value="">All</option>
+          <!-- options 1–10 -->
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
       </div>
-      <div class="form-group action-container">
-        <div class="form-row">
-          <button type="button" id="report-form-submit">Submit</button>
-        </div>
+      <div class="form-row">
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+          <option value="">All</option>
+          <!-- add your subjects here -->
+        </select>
       </div>
+      <button type="button" id="report-form-submit">Submit</button>
     </form>
-    <script type="module" src="./report.js"></script>
-  </body>
+
+    <table id="report-table" class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Class</th>
+          <th>Subjects</th>
+          <th>Marks</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Report</th>
+        </tr>
+      </thead>
+      <tbody id="report-list"></tbody>
+    </table>
+  </div>
+
+  <script type="module" src="report.js"></script>
+</body>
 </html>

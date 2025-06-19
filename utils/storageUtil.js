@@ -1,24 +1,11 @@
-export function getDataFromDB(table_name) {
-  const raw = localStorage.getItem(table_name);
-  let payload = [];
-  if (raw) {
-    try {
-      payload = JSON.parse(raw);
-    } catch (e) {
-      console.error("Error parsing data from localStorage", e);
-    }
-  }
-  return { payload };
+// utils/storageUtil.js
+export function getDataFromDB(key) {
+  const data = JSON.parse(localStorage.getItem(key)) || [];
+  return generateResponse(true, "Fetched", data);
 }
 
-export function setDataToDB(table_name, data) {
-  try {
-    localStorage.setItem(table_name, JSON.stringify(data));
-    return { status: true };
-  } catch (e) {
-    console.error("Error saving data to localStorage", e);
-    return { status: false };
-  }
+export function setDataToDB(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
 export function generateResponse(status, message, payload = null) {
