@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     subjectsFormGroup.querySelectorAll(".subject-row").forEach(row => {
       const [subjectInput, maskInput] = row.querySelectorAll("input");
       if (subjectInput.value && maskInput.value) {
-        student.subjects.push({ subject: subjectInput.value, mask: maskInput.value });
+        student.subjects.push({ subject: subjectInput.value, mark: maskInput.value });
       }
     });
 
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     subjectsFormGroup.innerHTML = "";
     (student.subjects || []).forEach(sub => {
-      addSubjectRow(sub.subject, sub.mask);
+      addSubjectRow(sub.subject, sub.mark);
     });
   }
 
@@ -96,3 +96,4 @@ document.addEventListener("DOMContentLoaded", function () {
     subjectsFormGroup.appendChild(subjectRow);
   }
 });
+

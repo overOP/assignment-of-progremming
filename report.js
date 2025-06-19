@@ -1,13 +1,21 @@
 import { getAllStudents, deleteStudent } from './models/students.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const nameInput = document.getElementById('fullname');
+  const nameSelect = document.getElementById('fullname');
   const classSelect = document.getElementById('class');
   const subjectSelect = document.getElementById('subject');
   const submitBtn = document.getElementById('report-form-submit');
   const reportList = document.getElementById('report-list');
 
   const allStudents = getAllStudents().payload || [];
+
+  // Populate student name dropdown
+  allStudents.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.name;
+    opt.textContent = s.name;
+    nameSelect.appendChild(opt);
+  });
 
   // Populate subject dropdown
   const subjects = [
@@ -27,20 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderTable() {
     reportList.innerHTML = '';
-    const nameFilter = nameInput.value.trim().toLowerCase();
+
+    const nameFilter = nameSelect.value.trim().toLowerCase();
     const classFilter = classSelect.value;
     const subjectFilter = subjectSelect.value;
 
     const filtered = allStudents.filter(s => {
       const nameMatch = nameFilter
-        ? s.name.toLowerCase().includes(nameFilter)
+        ? s.name.toLowerCase() === nameFilter
         : true;
-      const classMatch = classFilter
-        ? s.class === classFilter
-        : true;
+
+      // fix: class filter works correctly for empty string
+      const classMatch = !classFilter || classFilter === "" ? true : s.class === classFilter;
+
       const subjectMatch = subjectFilter
         ? (s.subjects || []).some(sub => sub.subject === subjectFilter)
         : true;
+
       return nameMatch && classMatch && subjectMatch;
     });
 
@@ -52,7 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
     filtered.forEach(student => {
       const row = document.createElement('tr');
       const subjects = (student.subjects || []).map(m => m.subject).join(', ');
-      const marks = (student.subjects || []).map(m => m.mask).join(', ');
+
+      // fix typo: mask → mark
+      const marks = (student.subjects || []).map(m => m.mark).join(', ');
 
       row.innerHTML = `
         <td>${student.name}</td>
@@ -81,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       row.querySelector('.report-btn').addEventListener('click', () => {
         alert(`Reporting student:\n${student.name}\nSubject(s): ${subjects}`);
-        // Implement your "report" logic here (download PDF, mark status, etc.)
+        // Your report logic here
       });
 
       reportList.appendChild(row);

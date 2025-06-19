@@ -20,7 +20,10 @@
     <form id="report-form" class="form">
       <div class="form-row">
         <label for="fullname">Name</label>
-        <input type="text" id="fullname" name="fullname" placeholder="Enter student name" />
+        <select id="fullname" name="fullname">
+          <option value="">All</option>
+          <!-- student names will be added dynamically here -->
+        </select>
       </div>
       <div class="form-row">
         <label for="class">Class</label>
@@ -43,7 +46,7 @@
         <label for="subject">Subject</label>
         <select id="subject" name="subject">
           <option value="">All</option>
-          <!-- add your subjects here -->
+          <!-- subjects will be added dynamically here -->
         </select>
       </div>
       <button type="button" id="report-form-submit">Submit</button>
